@@ -1,2 +1,2 @@
-# road-signs
+# ROAD SIGNS
 Road signs game
