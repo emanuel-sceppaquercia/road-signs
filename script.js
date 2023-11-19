@@ -111,7 +111,7 @@ var roadSigns = [{ id: 0, name: "no avanzar", type: "reglamentarias o prescripti
 ];
 
 var selectedSign;
-var selectedResponse = "";
+var selectedResponse = null;
 var score = 0;
 var round = 0;
 
@@ -184,6 +184,10 @@ function getRandomIndex(list) {
 
 // Method triggered on an response item click
 function onItemClick(item) {
+    if (selectedResponse) {
+        return;
+    }
+
     selectedResponse = item.textContent;
 
     handleScore();
@@ -262,12 +266,21 @@ function loadScores() {
     document.getElementById("round").textContent = round;
 }
 
+function resetSelectedResponse() {
+    selectedResponse = null;
+}
+
 // Method triggered on the "next" button click
 function onNext() {
+    if (selectedResponse === null) {
+        return;
+    }
+
     resetResponseStates();
     resetResponseCheckmarks();
     loadRandomRoadSign();
     loadResponses();
+    resetSelectedResponse();
 }
 
 function onFirstRender() {
