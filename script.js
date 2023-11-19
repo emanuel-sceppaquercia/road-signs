@@ -34,7 +34,7 @@ var roadSigns = [{ id: 0, name: "no avanzar", type: "reglamentarias o prescripti
 { id: 33, name: "circulación exclusiva (peatones)", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R18_e.jpg" },
 { id: 34, name: "uso de cadenas para nieve", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R19.jpg" },
 { id: 35, name: "giro obligatorio derecha", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R20_a.jpg" },
-{ id: 36, name: "gito obligatorio izquierda", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R20_b.jpg" },
+{ id: 36, name: "giro obligatorio izquierda", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R20_b.jpg" },
 { id: 37, name: "sentido de circulación (derecha)", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R21_a.jpg" },
 { id: 38, name: "sentido de circulación (izquierda)", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R21_b.jpg" },
 { id: 39, name: "sentido de circulación (comienzo sentido único)", type: "reglamentarias o prescriptivas", link: "http://www.senalar.com.ar/resources/cat_reglamentarias/reg_R21_c.jpg" },
@@ -186,9 +186,49 @@ function getRandomIndex(list) {
 function onItemClick(item) {
     selectedResponse = item.textContent;
 
-    resetResponseStates()
+    handleScore();
+    resetResponseStates();
 
     item.style.backgroundColor = "#b7e2b0";
+
+    showResults(item);
+}
+
+function showResults(item) {
+    var responseList = document.getElementById("responseList").children;
+
+    var responseIndex;
+
+    for (let index = 0; index < responseList.length; index++) {
+        if (responseList[index].id === item.id) {
+            responseIndex = index;
+            break;
+        }
+    }
+
+    for (let index = 0; index < 3; index++) {
+        if (responseList[index].textContent === selectedSign.name) {
+            if (index === 0) {
+                document.getElementById("firstCheckmark").classList.remove("hidden");
+            }
+            if (index === 1) {
+                document.getElementById("secondCheckmark").classList.remove("hidden");
+            }
+            if (index === 2) {
+                document.getElementById("thirdCheckmark").classList.remove("hidden");
+            }
+        } else {
+            if (index === 0) {
+                document.getElementById("firstClosemark").classList.remove("hidden");
+            }
+            if (index === 1) {
+                document.getElementById("secondClosemark").classList.remove("hidden");
+            }
+            if (index === 2) {
+                document.getElementById("thirdClosemark").classList.remove("hidden");
+            }
+        }
+    }
 }
 
 function resetResponseStates() {
@@ -197,6 +237,15 @@ function resetResponseStates() {
         // Remove the "highlight" class from all items
         item.style.backgroundColor = "#ffffff";
     });
+}
+
+function resetResponseCheckmarks() {
+    var listItems = document.getElementById("responseListCheckmarks");
+    var icons = listItems.getElementsByTagName("img");
+
+    for (let i = 0; i < 6; i++) {
+        icons[i].classList.add("hidden");
+    }
 }
 
 function handleScore() {
@@ -215,8 +264,8 @@ function loadScores() {
 
 // Method triggered on the "next" button click
 function onNext() {
-    handleScore();
     resetResponseStates();
+    resetResponseCheckmarks();
     loadRandomRoadSign();
     loadResponses();
 }

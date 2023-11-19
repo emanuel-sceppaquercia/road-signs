@@ -21,12 +21,32 @@
         <div class="signAndAnswers">
             <img id="imgContainer" class="img-fluid imgContainer" alt="señal de transito" src="" />
         
-            <div class="options">
-                <ul id="responseList" class="list-group">
-                    <li id="firstItem" onclick="onItemClick(this)" class="list-group-item selectable">item</li>
-                    <li id="secondItem" onclick="onItemClick(this)" class="list-group-item selectable"></li>
-                    <li id="thirdItem" onclick="onItemClick(this)" class="list-group-item selectable"></li>
-                </ul>
+            <div style="display: flex; justify-content: space-around;">
+                <div>
+                    <ul id="responseList" class="list-group">
+                        <li id="firstItem" onclick="onItemClick(this)" class="list-group-item selectable"></li>
+                        <li id="secondItem" onclick="onItemClick(this)" class="list-group-item selectable"></li>
+                        <li id="thirdItem" onclick="onItemClick(this)" class="list-group-item selectable"></li>
+                    </ul>
+                    
+                </div>
+
+                <div>
+                    <ul id="responseListCheckmarks" class="list-group">
+                        <li class="list-group-item" style="border: none;">
+                            <img id="firstCheckmark" class="svgIcon hidden" src="/resources/checkmark-svgrepo-com.svg">
+                            <img id="firstClosemark" class="svgIcon hidden" src="/resources/close-svgrepo-com.svg">
+                        </li>
+                        <li class="list-group-item" style="border: none;">
+                            <img id="secondCheckmark" class="svgIcon hidden" src="/resources/checkmark-svgrepo-com.svg">
+                            <img id="secondClosemark" class="svgIcon hidden" src="/resources/close-svgrepo-com.svg">
+                        </li>
+                        <li class="list-group-item" style="border: none;">
+                            <img id="thirdCheckmark" class="svgIcon hidden" src="/resources/checkmark-svgrepo-com.svg">
+                            <img id="thirdClosemark" class="svgIcon hidden" src="/resources/close-svgrepo-com.svg">
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div>
